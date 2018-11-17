@@ -586,10 +586,13 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
             strtok(input, "\n");
         }
         image im = load_image_color(input, 0, 0);
-        image r = letterbox_image(im, net->w, net->h);
-        //image r = resize_min(im, 320);
-        //printf("%d %d\n", r.w, r.h);
-        //resize_network(net, r.w, r.h);
+
+		//Original
+        //image r = letterbox_image(im, net->w, net->h);
+		//For MobileNet v2
+		image r = resize_image(im, net->w, net->h);
+
+		//resize_network(net, r.w, r.h);
         //printf("%d %d\n", r.w, r.h);
 
         float *X = r.data;
